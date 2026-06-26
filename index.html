@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Strategos Institute — Policy. Research. Strategy.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --navy2: #1C3144;
+    --navy3: #243B55;
+    --gold: #C9A84C;
+    --gold2: #B8912A;
+    --cream: #F7F4EF;
+    --cream2: #EDE9E1;
+    --sage: #5A7A65;
+    --text: #1A1A1A;
+    --text2: #4A4A4A;
+    --text3: #7A7A7A;
+    --white: #FFFFFF;
+    --border: #D8D2C6;
+    --red-tag: #8B2020;
+    --red-bg: #F5EAEA;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── MASTHEAD NAV ── */
+  .topbar {
+    background: var(--cream2);
+    border-bottom: 1px solid var(--border);
+    padding: 6px 0;
+    font-size: 12px;
+    color: var(--text3);
+  }
+  .topbar-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topbar a { color: var(--text3); text-decoration: none; margin-left: 16px; }
+  .topbar a:hover { color: var(--gold2); }
+  .topbar-date { font-family: 'Inter', sans-serif; letter-spacing: .05em; text-transform: uppercase; font-size: 11px; }
+
+  nav {
+    background: var(--navy);
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 3px solid var(--gold);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; gap: 0;
+  }
+  .nav-brand {
+    display: flex; flex-direction: column; padding: 14px 28px 14px 0;
+    border-right: 1px solid rgba(255,255,255,.12); margin-right: 24px;
+    text-decoration: none;
+  }
+  .nav-brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--white);
+    letter-spacing: -.01em; line-height: 1.1;
+  }
+  .nav-brand-subtitle {
+    font-size: 9px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-top: 2px;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2px; flex: 1;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,.82); font-size: 13px; font-weight: 400;
+    text-decoration: none; padding: 20px 14px; display: block;
+    letter-spacing: .02em; transition: color .15s;
+    position: relative;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-links a.active::after {
+    content: ''; position: absolute; bottom: 0; left: 14px; right: 14px;
+    height: 3px; background: var(--gold);
+  }
+  .nav-right {
+    display: flex; align-items: center; gap: 12px; margin-left: auto;
+  }
+  .btn-consult {
+    background: var(--gold); color: var(--navy); font-size: 12px;
+    font-weight: 600; padding: 8px 18px; border-radius: 2px;
+    text-decoration: none; letter-spacing: .04em; text-transform: uppercase;
+    transition: background .15s;
+  }
+  .btn-consult:hover { background: #dbb84e; }
+  .btn-subscribe {
+    background: transparent; color: rgba(255,255,255,.75); font-size: 12px;
+    font-weight: 500; padding: 8px 16px; border: 1px solid rgba(255,255,255,.2);
+    border-radius: 2px; text-decoration: none; letter-spacing: .04em;
+    text-transform: uppercase; transition: border-color .15s, color .15s;
+  }
+  .btn-subscribe:hover { border-color: rgba(255,255,255,.5); color: var(--white); }
+
+  /* ── BREAKING TICKER ── */
+  .ticker {
+    background: var(--navy2); border-bottom: 1px solid rgba(255,255,255,.08);
+    padding: 7px 0; overflow: hidden;
+    display: flex; align-items: center;
+  }
+  .ticker-label {
+    background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700;
+    padding: 3px 10px; text-transform: uppercase; letter-spacing: .1em;
+    white-space: nowrap; flex-shrink: 0; margin-right: 0;
+  }
+  .ticker-divider {
+    width: 1px; height: 24px; background: rgba(255,255,255,.15); flex-shrink: 0; margin: 0 16px;
+  }
+  .ticker-content {
+    overflow: hidden; flex: 1;
+  }
+  .ticker-track {
+    display: flex; gap: 60px; animation: ticker 40s linear infinite; white-space: nowrap;
+  }
+  .ticker-track span {
+    color: rgba(255,255,255,.72); font-size: 12px; white-space: nowrap;
+    padding-right: 60px; border-right: 1px solid rgba(255,255,255,.15);
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 48px 0 0;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 360px; gap: 0;
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .hero-main {
+    padding: 32px 32px 32px 0; border-right: 1px solid rgba(255,255,255,.08);
+  }
+  .hero-eyebrow {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 24px; height: 1px; background: var(--gold);
+  }
+  .hero-main h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 700; color: var(--white);
+    line-height: 1.18; letter-spacing: -.02em; margin-bottom: 16px;
+  }
+  .hero-main .hero-deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 16px; color: rgba(255,255,255,.72);
+    line-height: 1.65; margin-bottom: 20px; max-width: 560px;
+  }
+  .hero-meta {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+    font-size: 12px; color: rgba(255,255,255,.45);
+  }
+  .hero-meta .author { color: var(--gold); font-weight: 500; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .tag {
+    font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+  }
+  .tag-policy { background: rgba(201,168,76,.15); color: var(--gold); border: 1px solid rgba(201,168,76,.25); }
+  .tag-research { background: rgba(90,122,101,.15); color: #8FBA9A; border: 1px solid rgba(90,122,101,.25); }
+  .tag-security { background: rgba(180,60,60,.15); color: #E8907A; border: 1px solid rgba(180,60,60,.25); }
+  .tag-economy { background: rgba(100,140,200,.15); color: #96B8E0; border: 1px solid rgba(100,140,200,.25); }
+  .tag-documentary { background: rgba(150,100,200,.15); color: #C09AE0; border: 1px solid rgba(150,100,200,.25); }
+  .btn-read {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 700;
+    padding: 12px 24px; border-radius: 2px; text-decoration: none;
+    letter-spacing: .06em; text-transform: uppercase; transition: background .15s;
+  }
+  .btn-read:hover { background: #dbb84e; }
+  .btn-read::after { content: '→'; font-size: 14px; }
+
+  .hero-sidebar {
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .hero-sidebar-title {
+    font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .sidebar-item {
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .sidebar-item:last-child { border-bottom: none; }
+  .sidebar-item-tag {
+    font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 6px;
+  }
+  .sidebar-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; color: var(--white); font-weight: 600; line-height: 1.4;
+    cursor: pointer; transition: color .15s;
+  }
+  .sidebar-item h3:hover { color: var(--gold); }
+  .sidebar-item .meta {
+    font-size: 11px; color: rgba(255,255,255,.35); margin-top: 5px;
+  }
+
+  /* ── HERO BOTTOM BAR ── */
+  .hero-stat-bar {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  }
+  .hero-stat-bar-inner {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid rgba(255,255,255,.08); border-top: none;
+    margin-bottom: 0;
+  }
+  .stat-cell {
+    padding: 18px 24px; border-right: 1px solid rgba(255,255,255,.08);
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700; color: var(--white);
+  }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: .05em; }
+
+  /* ── SECTION WRAPPER ── */
+  section { padding: 64px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 32px; padding-bottom: 14px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -.01em;
+  }
+  .section-link {
+    font-size: 12px; color: var(--gold2); text-decoration: none; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .section-link:hover { text-decoration: underline; }
+
+  /* ── CONTENT GRID ── */
+  .content-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border);
+  }
+  .content-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+  .content-grid.four-col { grid-template-columns: repeat(4, 1fr); }
+
+  .article-card {
+    background: var(--white); padding: 28px; display: flex; flex-direction: column;
+    gap: 12px; transition: box-shadow .15s;
+  }
+  .article-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); position: relative; z-index:1; }
+  .article-card .card-tag { margin-bottom: 4px; }
+  .article-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; color: var(--navy);
+    line-height: 1.35; cursor: pointer; transition: color .15s;
+  }
+  .article-card h2:hover { color: var(--gold2); }
+  .article-card.featured h2 { font-size: 24px; }
+  .article-card p {
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px; color: var(--text2); line-height: 1.7; flex: 1;
+  }
+  .card-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11px; color: var(--text3); margin-top: auto; padding-top: 12px;
+    border-top: 1px solid var(--cream2);
+  }
+  .card-meta .author { color: var(--navy); font-weight: 500; }
+  .card-meta .read-time { color: var(--text3); }
+  .card-read-btn {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12px;
+    color: var(--gold2); font-weight: 600; text-decoration: none;
+    letter-spacing: .04em; text-transform: uppercase; transition: gap .15s;
+    cursor: pointer;
+  }
+  .card-read-btn:hover { gap: 10px; }
+
+  /* ── FEATURED ARTICLE (WIDE) ── */
+  .article-card.full-width { grid-column: 1/-1; flex-direction: row; gap: 32px; padding: 36px; }
+  .article-card.full-width .card-content { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  .article-card.full-width h2 { font-size: 30px; }
+  .article-card.full-width .card-img {
+    width: 300px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 48px; color: rgba(255,255,255,.12);
+    letter-spacing: -.03em; font-weight: 700; padding: 20px;
+  }
+
+  /* ── POLICY BRIEF SIDEBAR LAYOUT ── */
+  .two-panel {
+    display: grid; grid-template-columns: 1fr 320px; gap: 40px;
+  }
+  .brief-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+  .brief-item {
+    background: var(--white); padding: 22px 26px;
+    display: flex; gap: 18px; align-items: flex-start;
+    cursor: pointer; transition: background .12s;
+  }
+  .brief-item:hover { background: var(--cream); }
+  .brief-num {
+    font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700;
+    color: var(--cream2); line-height: 1; flex-shrink: 0; margin-top: -4px;
+    min-width: 36px; text-align: right;
+  }
+  .brief-content h3 {
+    font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+    color: var(--navy); line-height: 1.35; margin-bottom: 6px;
+  }
+  .brief-content p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .brief-content .brief-meta { font-size: 11px; color: var(--text3); margin-top: 8px; }
+  .brief-dl-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; color: var(--gold2); cursor: pointer;
+    text-transform: uppercase; letter-spacing: .06em; margin-top: 10px;
+    padding: 5px 10px; border: 1px solid var(--gold); border-radius: 2px;
+    background: transparent; transition: background .12s;
+    text-decoration: none;
+  }
+  .brief-dl-btn:hover { background: rgba(201,168,76,.08); }
+
+  /* ── CONSULTANCY ── */
+  .consult-section { background: var(--navy); }
+  .consult-section .section-title { color: var(--white); }
+  .consult-section .section-link { color: var(--gold); }
+  .consult-section .section-header { border-bottom-color: rgba(255,255,255,.15); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255,255,255,.08);
+  }
+  .service-card {
+    background: var(--navy2); padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 14px;
+    transition: background .15s;
+  }
+  .service-card:hover { background: var(--navy3); }
+  .service-icon {
+    width: 44px; height: 44px; background: rgba(201,168,76,.1);
+    border: 1px solid rgba(201,168,76,.2); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white);
+    font-weight: 700; line-height: 1.3;
+  }
+  .service-card p { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.7; flex: 1; }
+  .service-card ul { padding-left: 16px; }
+  .service-card ul li {
+    font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7;
+    margin-bottom: 3px;
+  }
+  .service-card .service-price {
+    font-size: 11px; color: var(--gold); font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; margin-top: auto; padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .service-card .service-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--gold);
+    cursor: pointer; text-transform: uppercase; letter-spacing: .06em;
+    transition: gap .15s; text-decoration: none;
+  }
+  .service-card .service-cta:hover { gap: 10px; }
+  .consult-cta-bar {
+    margin-top: 40px; padding: 32px 36px;
+    background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.2);
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .consult-cta-bar h3 {
+    font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white);
+    font-weight: 700;
+  }
+  .consult-cta-bar p { font-size: 14px; color: rgba(255,255,255,.55); margin-top: 4px; }
+  .btn-gold-lg {
+    display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+    background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 700;
+    padding: 14px 28px; border-radius: 2px; text-decoration: none;
+    letter-spacing: .06em; text-transform: uppercase; transition: background .15s;
+  }
+  .btn-gold-lg:hover { background: #dbb84e; }
+
+  /* ── DOCUMENTARIES ── */
+  .doc-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border);
+  }
+  .doc-card {
+    background: var(--white); overflow: hidden; cursor: pointer;
+    transition: box-shadow .15s;
+  }
+  .doc-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,.1); position: relative; z-index: 1; }
+  .doc-thumb {
+    height: 180px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .doc-thumb.t1 { background: linear-gradient(135deg, #1a2a4a 0%, #0d1b2a 100%); }
+  .doc-thumb.t2 { background: linear-gradient(135deg, #2a1a1a 0%, #1a0d0d 100%); }
+  .doc-thumb.t3 { background: linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 100%); }
+  .doc-thumb-label {
+    font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700;
+    color: rgba(255,255,255,.1); letter-spacing: -.02em; text-align: center; padding: 20px;
+  }
+  .doc-play {
+    position: absolute; width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(201,168,76,.9); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .15s, transform .15s;
+  }
+  .doc-card:hover .doc-play { background: var(--gold); transform: scale(1.08); }
+  .doc-play-icon {
+    width: 0; height: 0; border-style: solid;
+    border-width: 9px 0 9px 16px; border-color: transparent transparent transparent var(--navy);
+    margin-left: 3px;
+  }
+  .doc-duration {
+    position: absolute; bottom: 10px; right: 12px;
+    background: rgba(0,0,0,.65); color: var(--white); font-size: 11px;
+    font-weight: 600; padding: 2px 7px; border-radius: 2px; letter-spacing: .04em;
+  }
+  .doc-body { padding: 20px; }
+  .doc-body .tag { margin-bottom: 8px; }
+  .doc-body h3 {
+    font-family: 'Playfair Display', serif; font-size: 17px; color: var(--navy);
+    font-weight: 700; line-height: 1.35; margin-bottom: 8px;
+  }
+  .doc-body p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .doc-body .doc-meta {
+    font-size: 11px; color: var(--text3); margin-top: 12px; padding-top: 10px;
+    border-top: 1px solid var(--cream2); display: flex; justify-content: space-between;
+  }
+
+  /* ── SIDEBAR COMPONENTS ── */
+  .sidebar-box {
+    background: var(--white); border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .sidebar-box-header {
+    padding: 14px 18px; background: var(--navy); color: var(--white);
+    font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    border-bottom: 2px solid var(--gold);
+  }
+  .sidebar-box-body { padding: 18px; }
+  .sidebar-expert { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--cream2); }
+  .sidebar-expert:last-child { border-bottom: none; }
+  .expert-avatar {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    background: var(--navy); display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700;
+    color: var(--gold);
+  }
+  .expert-info h4 { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .expert-info p { font-size: 11px; color: var(--text3); line-height: 1.5; }
+  .subscribe-form { display: flex; flex-direction: column; gap: 10px; }
+  .subscribe-form input {
+    padding: 10px 14px; border: 1px solid var(--border); font-size: 13px;
+    font-family: 'Inter', sans-serif; border-radius: 2px; outline: none;
+    transition: border-color .15s; width: 100%;
+  }
+  .subscribe-form input:focus { border-color: var(--gold); }
+  .subscribe-form select {
+    padding: 10px 14px; border: 1px solid var(--border); font-size: 13px;
+    font-family: 'Inter', sans-serif; border-radius: 2px; outline: none;
+    background: var(--white); cursor: pointer; width: 100%;
+  }
+  .btn-subscribe-sm {
+    background: var(--navy); color: var(--white); padding: 10px 16px;
+    font-size: 12px; font-weight: 600; border: none; border-radius: 2px;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .15s; width: 100%;
+  }
+  .btn-subscribe-sm:hover { background: var(--navy3); }
+  .subscribe-note { font-size: 11px; color: var(--text3); text-align: center; }
+
+  /* ── EVENTS ── */
+  .events-bg { background: var(--cream2); }
+  .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .event-card {
+    background: var(--white); border: 1px solid var(--border); padding: 24px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .event-date-block {
+    display: flex; gap: 12px; align-items: center; margin-bottom: 4px;
+  }
+  .event-day-box {
+    background: var(--navy); color: var(--white); padding: 6px 12px;
+    border-radius: 2px; text-align: center;
+  }
+  .event-day-box .day {
+    font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700;
+    line-height: 1; color: var(--gold);
+  }
+  .event-day-box .month {
+    font-size: 10px; text-transform: uppercase; letter-spacing: .1em; opacity: .7;
+  }
+  .event-info h3 {
+    font-family: 'Playfair Display', serif; font-size: 16px; color: var(--navy);
+    font-weight: 700; line-height: 1.35;
+  }
+  .event-info p { font-size: 12px; color: var(--text3); }
+  .event-desc { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .event-card .tag { margin-bottom: 0; }
+  .event-register {
+    display: inline-block; margin-top: auto; padding: 8px 16px;
+    border: 1px solid var(--navy); font-size: 12px; font-weight: 600;
+    color: var(--navy); text-decoration: none; border-radius: 2px;
+    text-transform: uppercase; letter-spacing: .06em; transition: background .15s, color .15s;
+    cursor: pointer; text-align: center;
+  }
+  .event-register:hover { background: var(--navy); color: var(--white); }
+
+  /* ── TEAM ── */
+  .team-section { background: var(--white); }
+  .team-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border);
+  }
+  .team-card {
+    background: var(--cream); padding: 28px 22px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    transition: background .15s;
+  }
+  .team-card:hover { background: var(--white); }
+  .team-avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--navy); display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+    color: var(--gold); margin-bottom: 4px;
+  }
+  .team-card h3 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--navy); font-weight: 700; }
+  .team-card .role { font-size: 12px; color: var(--gold2); font-weight: 600; letter-spacing: .04em; }
+  .team-card p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .team-card .expertise {
+    display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 4px;
+  }
+  .expertise-tag {
+    font-size: 10px; color: var(--text3); background: var(--cream2);
+    padding: 3px 8px; border-radius: 2px; border: 1px solid var(--border);
+  }
+
+  /* ── PUBLICATIONS ── */
+  .pub-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .pub-card {
+    background: var(--white); border: 1px solid var(--border);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .pub-spine {
+    height: 6px;
+  }
+  .pub-spine.policy { background: var(--gold); }
+  .pub-spine.research { background: var(--sage); }
+  .pub-spine.security { background: #8B2020; }
+  .pub-spine.economy { background: #2060A0; }
+  .pub-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .pub-type {
+    font-size: 9px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--text3); font-weight: 600;
+  }
+  .pub-body h3 {
+    font-family: 'Playfair Display', serif; font-size: 15px; color: var(--navy);
+    font-weight: 700; line-height: 1.4; cursor: pointer;
+  }
+  .pub-body h3:hover { color: var(--gold2); }
+  .pub-body .authors { font-size: 12px; color: var(--text2); margin-top: auto; }
+  .pub-body .pub-date { font-size: 11px; color: var(--text3); }
+  .pub-actions { padding: 12px 20px; border-top: 1px solid var(--cream2); display: flex; gap: 10px; }
+  .btn-pdf {
+    flex: 1; text-align: center; padding: 7px 10px; border: 1px solid var(--border);
+    font-size: 11px; font-weight: 600; color: var(--navy); border-radius: 2px;
+    cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: .05em;
+    transition: background .12s;
+  }
+  .btn-pdf:hover { background: var(--cream2); }
+  .btn-cite {
+    padding: 7px 10px; border: 1px solid var(--border); font-size: 11px;
+    font-weight: 600; color: var(--text3); border-radius: 2px;
+    cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: .05em;
+    transition: background .12s;
+  }
+  .btn-cite:hover { background: var(--cream2); }
+
+  /* ── MEDIA UPLOAD ── */
+  .upload-section { background: var(--navy2); }
+  .upload-section .section-title { color: var(--white); }
+  .upload-section .section-header { border-bottom-color: rgba(255,255,255,.15); }
+  .upload-section .section-link { color: var(--gold); }
+  .upload-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(255,255,255,.08);
+  }
+  .upload-card { background: var(--navy); padding: 36px; }
+  .upload-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white);
+    font-weight: 700; margin-bottom: 12px;
+  }
+  .upload-card p { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.7; margin-bottom: 20px; }
+  .upload-zone {
+    border: 2px dashed rgba(201,168,76,.3); padding: 28px; text-align: center;
+    border-radius: 2px; cursor: pointer; transition: border-color .15s;
+    margin-bottom: 16px;
+  }
+  .upload-zone:hover { border-color: rgba(201,168,76,.6); }
+  .upload-icon { font-size: 32px; margin-bottom: 10px; opacity: .5; }
+  .upload-zone p { font-size: 13px; color: rgba(255,255,255,.45); margin-bottom: 0; }
+  .upload-zone strong { color: var(--gold); }
+  .upload-requirements { font-size: 11px; color: rgba(255,255,255,.3); }
+  .upload-requirements li { margin-bottom: 3px; padding-left: 0; list-style: none; }
+  .upload-requirements li::before { content: '✓ '; color: var(--gold); }
+  .upload-form-field {
+    display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px;
+  }
+  .upload-form-field label { font-size: 12px; color: rgba(255,255,255,.5); font-weight: 500; letter-spacing: .04em; }
+  .upload-form-field input,
+  .upload-form-field select,
+  .upload-form-field textarea {
+    padding: 10px 14px; border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.05); color: var(--white); font-size: 13px;
+    font-family: 'Inter', sans-serif; border-radius: 2px; outline: none;
+    transition: border-color .15s;
+  }
+  .upload-form-field input:focus,
+  .upload-form-field textarea:focus { border-color: rgba(201,168,76,.5); }
+  .upload-form-field textarea { resize: vertical; min-height: 90px; }
+  .btn-submit-upload {
+    width: 100%; background: var(--gold); color: var(--navy); padding: 12px;
+    font-size: 13px; font-weight: 700; border: none; border-radius: 2px;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .15s;
+  }
+  .btn-submit-upload:hover { background: #dbb84e; }
+
+  /* ── IMPACT COUNTER ── */
+  .impact-bar { background: var(--gold); padding: 28px 0; }
+  .impact-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+  }
+  .impact-cell {
+    text-align: center; padding: 0 20px; border-right: 1px solid rgba(13,27,42,.15);
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .impact-cell:last-child { border-right: none; }
+  .impact-num {
+    font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700;
+    color: var(--navy); line-height: 1;
+  }
+  .impact-label { font-size: 12px; color: rgba(13,27,42,.7); font-weight: 500; }
+
+  /* ── CONTACT / INQUIRY ── */
+  .contact-section { background: var(--cream2); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .contact-info h3 {
+    font-family: 'Playfair Display', serif; font-size: 24px; color: var(--navy);
+    font-weight: 700; margin-bottom: 12px;
+  }
+  .contact-info p { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; }
+  .contact-detail {
+    display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px;
+  }
+  .contact-detail .icon {
+    width: 36px; height: 36px; background: var(--navy);
+    display: flex; align-items: center; justify-content: center; border-radius: 2px;
+    flex-shrink: 0; font-size: 16px;
+  }
+  .contact-detail .cd-text h4 { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .contact-detail .cd-text p { font-size: 12px; color: var(--text2); margin-bottom: 0; }
+  .inquiry-form { background: var(--white); padding: 28px; border: 1px solid var(--border); }
+  .inquiry-form h3 {
+    font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy);
+    font-weight: 700; margin-bottom: 20px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-field {
+    display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px;
+  }
+  .form-field label { font-size: 12px; font-weight: 500; color: var(--text2); letter-spacing: .03em; }
+  .form-field input, .form-field select, .form-field textarea {
+    padding: 10px 14px; border: 1px solid var(--border);
+    font-size: 13px; font-family: 'Inter', sans-serif;
+    border-radius: 2px; outline: none; transition: border-color .15s;
+  }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--navy); }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+  .btn-send {
+    width: 100%; background: var(--navy); color: var(--white); padding: 12px;
+    font-size: 13px; font-weight: 600; border: none; border-radius: 2px;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .15s;
+  }
+  .btn-send:hover { background: var(--navy3); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--navy); padding: 56px 0 0; }
+  .footer-top {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px 40px;
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .footer-brand { }
+  .footer-brand .brand-name {
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+    color: var(--white); margin-bottom: 6px;
+  }
+  .footer-brand .brand-tagline {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .footer-brand p {
+    font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .footer-social { display: flex; gap: 8px; }
+  .social-btn {
+    width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.15);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.5); font-size: 14px; cursor: pointer;
+    transition: border-color .15s, color .15s; text-decoration: none;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col h4 {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul li a {
+    font-size: 13px; color: rgba(255,255,255,.45); text-decoration: none;
+    transition: color .15s;
+  }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    padding: 16px 24px; display: flex; justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.3); }
+  .footer-bottom-links { display: flex; gap: 20px; }
+  .footer-bottom-links a {
+    font-size: 12px; color: rgba(255,255,255,.3); text-decoration: none; transition: color .15s;
+  }
+  .footer-bottom-links a:hover { color: rgba(255,255,255,.6); }
+  .footer-legal {
+    background: rgba(0,0,0,.2);
+    border-top: 1px solid rgba(255,255,255,.05);
+    padding: 12px 0;
+  }
+
+  /* ── UPLOAD MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7);
+    z-index: 1000; align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--white); max-width: 540px; width: 90%;
+    padding: 36px; position: relative; max-height: 90vh; overflow-y: auto;
+  }
+  .modal h2 {
+    font-family: 'Playfair Display', serif; font-size: 24px; color: var(--navy);
+    font-weight: 700; margin-bottom: 6px;
+  }
+  .modal p.sub { font-size: 14px; color: var(--text2); margin-bottom: 24px; }
+  .modal-close {
+    position: absolute; top: 18px; right: 20px; background: none; border: none;
+    font-size: 22px; cursor: pointer; color: var(--text3); line-height: 1;
+  }
+
+  /* ── NOTIFICATION TOAST ── */
+  .toast {
+    position: fixed; bottom: 28px; right: 28px; z-index: 2000;
+    background: var(--navy); color: var(--white); padding: 14px 22px;
+    border-left: 4px solid var(--gold); font-size: 13px; font-weight: 500;
+    opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s;
+    pointer-events: none; max-width: 320px; line-height: 1.5;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ── SEARCH BAR ── */
+  .search-bar {
+    background: var(--cream2); padding: 20px 0; border-bottom: 1px solid var(--border);
+  }
+  .search-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; gap: 12px; align-items: center;
+  }
+  .search-input-wrap { flex: 1; position: relative; }
+  .search-input-wrap input {
+    width: 100%; padding: 11px 16px 11px 42px;
+    border: 1px solid var(--border); font-size: 14px; font-family: 'Inter', sans-serif;
+    border-radius: 2px; outline: none; background: var(--white);
+  }
+  .search-input-wrap input:focus { border-color: var(--navy); }
+  .search-icon {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--text3); font-size: 16px;
+  }
+  .filter-select {
+    padding: 10px 14px; border: 1px solid var(--border); background: var(--white);
+    font-size: 13px; font-family: 'Inter', sans-serif; border-radius: 2px;
+    outline: none; cursor: pointer;
+  }
+  .btn-search-go {
+    background: var(--navy); color: var(--white); padding: 11px 22px;
+    font-size: 13px; font-weight: 600; border: none; border-radius: 2px;
+    cursor: pointer; letter-spacing: .04em; transition: background .15s;
+  }
+  .btn-search-go:hover { background: var(--navy3); }
+
+  /* ── ARTICLE PAGE ── */
+  .article-page { background: var(--white); display: none; }
+  .article-page.active { display: block; }
+  .article-header {
+    background: var(--navy); padding: 56px 0 40px;
+  }
+  .article-header-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .article-back {
+    display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,.5);
+    font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em;
+    cursor: pointer; margin-bottom: 28px; background: none; border: none;
+    transition: color .15s; padding: 0;
+  }
+  .article-back:hover { color: var(--gold); }
+  .article-header-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .article-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px; font-weight: 700; color: var(--white);
+    line-height: 1.2; letter-spacing: -.02em; margin-bottom: 18px;
+  }
+  .article-header .deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px; color: rgba(255,255,255,.68); line-height: 1.7; margin-bottom: 24px;
+  }
+  .article-byline {
+    display: flex; gap: 24px; flex-wrap: wrap; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-size: 13px; color: rgba(255,255,255,.5);
+  }
+  .article-byline strong { color: var(--gold); font-weight: 600; }
+  .article-byline span { display: flex; align-items: center; gap: 6px; }
+
+  .article-notice {
+    background: rgba(201,168,76,.07); border-left: 3px solid var(--gold);
+    padding: 14px 20px; margin: 32px 0; font-size: 13px; color: var(--text2);
+    line-height: 1.65;
+  }
+  .article-notice strong { color: var(--navy); }
+
+  .article-body { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+
+  .article-abstract {
+    background: var(--cream); border: 1px solid var(--border);
+    padding: 28px 32px; margin-bottom: 40px;
+  }
+  .article-abstract h3 {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold2); font-weight: 700; margin-bottom: 12px;
+  }
+  .article-abstract p {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px; color: var(--text); line-height: 1.8; font-style: italic;
+  }
+
+  .article-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--navy);
+    margin: 40px 0 14px; padding-top: 32px;
+    border-top: 1px solid var(--cream2); line-height: 1.3;
+  }
+  .article-body h2:first-of-type { border-top: none; padding-top: 0; }
+  .article-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700; color: var(--navy);
+    margin: 28px 0 10px;
+  }
+  .article-body p {
+    font-family: 'Source Serif 4', serif;
+    font-size: 16px; color: var(--text); line-height: 1.85;
+    margin-bottom: 18px;
+  }
+  .article-pullquote {
+    background: var(--navy); padding: 24px 28px; margin: 32px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .article-pullquote .pq-label {
+    font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 700; margin-bottom: 10px;
+  }
+  .article-pullquote p {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.7; margin: 0;
+    font-style: italic;
+  }
+
+  .article-table-wrap { overflow-x: auto; margin: 28px 0; }
+  .article-table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    border: 1px solid var(--border);
+  }
+  .article-table thead tr { background: var(--navy); }
+  .article-table thead th {
+    padding: 12px 14px; text-align: left; color: var(--white);
+    font-size: 11px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; border-right: 1px solid rgba(255,255,255,.1);
+  }
+  .article-table thead th:last-child { border-right: none; }
+  .article-table tbody tr { border-bottom: 1px solid var(--border); }
+  .article-table tbody tr:nth-child(even) { background: var(--cream); }
+  .article-table tbody td {
+    padding: 10px 14px; color: var(--text); line-height: 1.5;
+    border-right: 1px solid var(--border); vertical-align: top;
+  }
+  .article-table tbody td:last-child { border-right: none; }
+  .article-table caption {
+    caption-side: bottom; font-size: 12px; color: var(--text3);
+    padding: 8px 0; text-align: left; font-style: italic;
+  }
+
+  .article-glossary { margin: 40px 0; }
+  .article-glossary h2 { border-top: none !important; padding-top: 0 !important; }
+  .glossary-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border); margin-top: 16px;
+  }
+  .glossary-item { background: var(--white); padding: 14px 18px; }
+  .glossary-item dt {
+    font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px;
+  }
+  .glossary-item dd { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+  .article-refs { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--navy); }
+  .article-refs h2 { border-top: none !important; padding-top: 0 !important; margin-top: 0; }
+  .ref-category { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); font-weight: 600; margin: 20px 0 8px; }
+  .article-refs p {
+    font-size: 13px; color: var(--text2); line-height: 1.7;
+    padding-left: 20px; text-indent: -20px; margin-bottom: 8px;
+  }
+
+  .article-share-bar {
+    background: var(--cream2); border-top: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .article-share-inner {
+    max-width: 860px; margin: 0 auto; padding: 0 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+  }
+  .share-label { font-size: 12px; font-weight: 600; color: var(--navy); letter-spacing: .06em; text-transform: uppercase; }
+  .share-btns { display: flex; gap: 8px; }
+  .share-btn {
+    padding: 7px 16px; border: 1px solid var(--border); border-radius: 2px;
+    font-size: 12px; font-weight: 600; color: var(--navy); cursor: pointer;
+    background: var(--white); transition: background .12s; text-decoration: none;
+  }
+  .share-btn:hover { background: var(--cream); }
+  .btn-dl-article {
+    padding: 8px 18px; background: var(--navy); color: var(--white);
+    border: none; border-radius: 2px; font-size: 12px; font-weight: 600;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .12s;
+  }
+  .btn-dl-article:hover { background: var(--navy3); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-sidebar { border-top: 1px solid rgba(255,255,255,.08); border-right: none; }
+    .hero-stat-bar-inner { grid-template-columns: repeat(2,1fr); }
+    .services-grid, .content-grid, .doc-grid { grid-template-columns: 1fr; }
+    .team-grid, .pub-grid { grid-template-columns: repeat(2,1fr); }
+    .two-panel, .upload-grid, .contact-grid { grid-template-columns: 1fr; }
+    .article-card.full-width { flex-direction: column; }
+    .article-card.full-width .card-img { width: 100%; height: 120px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .impact-inner { grid-template-columns: repeat(3,1fr); }
+    .events-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    .hero-main h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="topbar-date" id="current-date"></span>
+    <div>
+      <a href="#about">About</a>
+      <a href="#experts">Our Experts</a>
+      <a href="#media">Press</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">
+      <span class="nav-brand-title">Strategos Institute</span>
+      <span class="nav-brand-subtitle">Policy · Research · Strategy</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#research" class="active">Research</a></li>
+      <li><a href="#policy">Policy</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#documentaries">Documentaries</a></li>
+      <li><a href="#consultancy">Consultancy</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#experts">Experts</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#subscribe" class="btn-subscribe">Subscribe</a>
+      <a href="#contact" class="btn-consult">Hire Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-label">Latest</span>
+  <div class="ticker-divider"></div>
+  <div class="ticker-content">
+    <div class="ticker-track" id="ticker-track">
+      <span>New Research: Regional Security Architectures in a Multipolar World Order — Available Now</span>
+      <span>Policy Brief: Climate Finance Mechanisms and Sovereign Debt in Developing Economies</span>
+      <span>Upcoming Event: Annual Strategic Foresight Conference — Register Now</span>
+      <span>Documentary Release: "The Corridor" — A Film on Belt and Road Infrastructure Politics</span>
+      <span>Consultancy: Strategic Advisory Services Now Open for Government and Corporate Clients</span>
+      <span>New Research: Regional Security Architectures in a Multipolar World Order — Available Now</span>
+      <span>Policy Brief: Climate Finance Mechanisms and Sovereign Debt in Developing Economies</span>
+      <span>Upcoming Event: Annual Strategic Foresight Conference — Register Now</span>
+      <span>Documentary Release: "The Corridor" — A Film on Belt and Road Infrastructure Politics</span>
+      <span>Consultancy: Strategic Advisory Services Now Open for Government and Corporate Clients</span>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <div class="search-inner">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search research, policy briefs, authors, topics…"/>
+    </div>
+    <select class="filter-select">
+      <option>All Topics</option>
+      <option>Security &amp; Defense</option>
+      <option>Political Economy</option>
+      <option>Climate &amp; Energy</option>
+      <option>Governance &amp; Democracy</option>
+      <option>South Asia</option>
+      <option>Middle East</option>
+    </select>
+    <select class="filter-select">
+      <option>All Types</option>
+      <option>Research Paper</option>
+      <option>Policy Brief</option>
+      <option>Commentary</option>
+      <option>Documentary</option>
+      <option>Report</option>
+    </select>
+    <button class="btn-search-go">Search</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="research">
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="hero-eyebrow">Featured Research Paper — NDU Islamabad</div>
+        <h1>Artificial Intelligence in Modern Military and Defense Strategies</h1>
+        <p class="hero-deck">A comparative and critical analysis of how the United States, China, Israel, India, Pakistan, and Iran are integrating AI into their defense architectures — drawing on operational evidence from Iran 2026, South Asia 2025, and Gaza.</p>
+        <div class="hero-meta">
+          <span class="author">Rizwan Ullah &amp; Hamza Saeed Toor</span>
+          <span>National Defence University, Islamabad</span>
+          <span>·</span>
+          <span>June 2026</span>
+          <span>·</span>
+          <span>35 min read</span>
+        </div>
+        <div class="hero-tags">
+          <span class="tag tag-security">Security &amp; Defense</span>
+          <span class="tag tag-policy">AI Policy</span>
+          <span class="tag tag-research">Research Paper</span>
+        </div>
+        <a href="#" class="btn-read" onclick="openArticle(); return false;">Read Full Paper</a>
+      </div>
+      <div class="hero-sidebar">
+        <div class="hero-sidebar-title">Also in This Issue</div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-tag">Policy Brief</div>
+          <h3>The Digital Rupee and South Asian Monetary Sovereignty</h3>
+          <div class="meta">Dr. Kamran Malik · 12 min</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-tag">Commentary</div>
+          <h3>After the Peace Talks: A Critical Assessment of Doha's Afterlife</h3>
+          <div class="meta">Farida Noor · 8 min</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-tag">Research Paper</div>
+          <h3>Water Securitization and Interstate Conflict in the Indus Basin</h3>
+          <div class="meta">Prof. Zara Ahmad · 22 min</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-tag">Report</div>
+          <h3>Annual Democracy Index: South &amp; Central Asia 2025–26</h3>
+          <div class="meta">Research Team · Full Report</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stat-bar">
+    <div class="hero-stat-bar-inner">
+      <div class="stat-cell"><span class="stat-num">340+</span><span class="stat-label">Published Works</span></div>
+      <div class="stat-cell"><span class="stat-num">18</span><span class="stat-label">Resident Fellows</span></div>
+      <div class="stat-cell"><span class="stat-num">42</span><span class="stat-label">Countries Covered</span></div>
+      <div class="stat-cell"><span class="stat-num">12</span><span class="stat-label">Years of Research</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- IMPACT BAR -->
+<div class="impact-bar">
+  <div class="impact-inner">
+    <div class="impact-cell"><span class="impact-num">1.2M</span><span class="impact-label">Annual Readers</span></div>
+    <div class="impact-cell"><span class="impact-num">68</span><span class="impact-label">Policy Consultations</span></div>
+    <div class="impact-cell"><span class="impact-num">24</span><span class="impact-label">Documentaries</span></div>
+    <div class="impact-cell"><span class="impact-num">93</span><span class="impact-label">Partner Institutions</span></div>
+    <div class="impact-cell"><span class="impact-num">31</span><span class="impact-label">Govt. Engagements</span></div>
+  </div>
+</div>
+
+<!-- LATEST RESEARCH -->
+<section id="policy">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Latest Research &amp; Analysis</h2>
+      <a href="#" class="section-link">View All →</a>
+    </div>
+    <div class="content-grid">
+      <div class="article-card featured full-width">
+        <div class="card-img">Strategos</div>
+        <div class="card-content">
+          <span class="tag tag-security card-tag">Security Studies</span>
+          <h2>Nuclear Posture in an Era of Conventional Precision: The Stability Paradox Revisited</h2>
+          <p>Emerging precision-strike capabilities are fundamentally altering the calculus of nuclear deterrence. This paper examines how advances in long-range conventional munitions are lowering the threshold for nuclear response among second-tier nuclear states, creating new instability vectors that Cold War deterrence frameworks were not designed to address.</p>
+          <div class="card-meta">
+            <span class="author">Prof. Imran Shah &amp; Dr. Sarah Qureshi</span>
+            <span class="read-time">28 min read · June 2026</span>
+          </div>
+          <a class="card-read-btn">Read Full Paper →</a>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <span class="tag tag-economy card-tag">Political Economy</span>
+        <h2>From Belt to Debt: Renegotiating Chinese Infrastructure Loans in Africa</h2>
+        <p>A granular analysis of 14 debt-renegotiation episodes across sub-Saharan Africa, drawing lessons for borrowing nations on negotiation leverage and conditionality management.</p>
+        <div class="card-meta">
+          <span class="author">Dr. Amara Diallo</span>
+          <span class="read-time">16 min</span>
+        </div>
+        <a class="card-read-btn">Read →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="tag tag-policy card-tag">Governance</span>
+        <h2>Hybrid Regimes and the Legitimacy Deficit: Elections Without Democracy</h2>
+        <p>Why competitive authoritarian systems are proving more durable than transitology predicted, and what this means for international democracy-promotion strategies.</p>
+        <div class="card-meta">
+          <span class="author">Nadia Hussain, PhD</span>
+          <span class="read-time">14 min</span>
+        </div>
+        <a class="card-read-btn">Read →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="tag tag-research card-tag">Climate &amp; Security</span>
+        <h2>Glacial Retreat and Conflict Risk in High-Altitude Border Zones</h2>
+        <p>New hydrological modelling links accelerating Himalayan glacial loss to measurable increases in cross-border friction over shared water systems through 2040.</p>
+        <div class="card-meta">
+          <span class="author">Dr. Laila Khan</span>
+          <span class="read-time">20 min</span>
+        </div>
+        <a class="card-read-btn">Read →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY BRIEFS + SIDEBAR -->
+<section style="background: var(--cream2); padding: 64px 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Policy Briefs</h2>
+      <a href="#" class="section-link">Full Library →</a>
+    </div>
+    <div class="two-panel">
+      <div class="brief-list">
+        <div class="brief-item">
+          <span class="brief-num">01</span>
+          <div class="brief-content">
+            <span class="tag tag-policy card-tag">Foreign Policy</span>
+            <h3>Reconfiguring SAARC: A Framework for Regional Integration After Strategic Divergence</h3>
+            <p>Recommends a two-track architecture separating economic from security cooperation, with graduated opt-in mechanisms for contentious bilateral relationships.</p>
+            <div class="brief-meta">Dr. Ayesha Tariq · June 2026 · 14 pages</div>
+            <a href="#" class="brief-dl-btn" onclick="showToast('PDF downloading…'); return false;">⬇ Download PDF</a>
+          </div>
+        </div>
+        <div class="brief-item">
+          <span class="brief-num">02</span>
+          <div class="brief-content">
+            <span class="tag tag-economy card-tag">Energy Policy</span>
+            <h3>Carbon Pricing Mechanisms for Emerging Markets: Lessons from the EU ETS</h3>
+            <p>Adapts the EU emissions trading framework for South and Southeast Asian economies, accounting for developmental constraints and industrial structure.</p>
+            <div class="brief-meta">Prof. Bilal Chaudhry · May 2026 · 18 pages</div>
+            <a href="#" class="brief-dl-btn" onclick="showToast('PDF downloading…'); return false;">⬇ Download PDF</a>
+          </div>
+        </div>
+        <div class="brief-item">
+          <span class="brief-num">03</span>
+          <div class="brief-content">
+            <span class="tag tag-security card-tag">Terrorism &amp; Extremism</span>
+            <h3>Narrative Disruption as Counterterrorism: Strategic Communication Beyond Kinetics</h3>
+            <p>Drawing on discourse analysis and case studies from the MENA region, this brief argues for mainstreaming narrative-based strategies into national CT frameworks.</p>
+            <div class="brief-meta">Dr. Farida Noor · May 2026 · 22 pages</div>
+            <a href="#" class="brief-dl-btn" onclick="showToast('PDF downloading…'); return false;">⬇ Download PDF</a>
+          </div>
+        </div>
+        <div class="brief-item">
+          <span class="brief-num">04</span>
+          <div class="brief-content">
+            <span class="tag tag-policy card-tag">Diaspora &amp; Soft Power</span>
+            <h3>The Pakistani Diaspora as a Strategic Asset: Proposals for Institutional Engagement</h3>
+            <p>Policy recommendations for leveraging diaspora networks in advocacy, investment mobilization, and bilateral diplomacy — with comparative cases from India and Turkey.</p>
+            <div class="brief-meta">Research Team · April 2026 · 26 pages</div>
+            <a href="#" class="brief-dl-btn" onclick="showToast('PDF downloading…'); return false;">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div>
+        <div class="sidebar-box">
+          <div class="sidebar-box-header">Our Experts</div>
+          <div class="sidebar-box-body" id="experts">
+            <div class="sidebar-expert">
+              <div class="expert-avatar">AT</div>
+              <div class="expert-info">
+                <h4>Dr. Ayesha Tariq</h4>
+                <p>Senior Fellow, Strategic Studies. Former advisor to the Ministry of Foreign Affairs.</p>
+              </div>
+            </div>
+            <div class="sidebar-expert">
+              <div class="expert-avatar">IS</div>
+              <div class="expert-info">
+                <h4>Prof. Imran Shah</h4>
+                <p>Chair, Nuclear Policy Program. Former ACDA consultant.</p>
+              </div>
+            </div>
+            <div class="sidebar-expert">
+              <div class="expert-avatar">FN</div>
+              <div class="expert-info">
+                <h4>Dr. Farida Noor</h4>
+                <p>Director, Conflict Narratives Lab. Expert in SC and counterterrorism.</p>
+              </div>
+            </div>
+            <div class="sidebar-expert">
+              <div class="expert-avatar">LK</div>
+              <div class="expert-info">
+                <h4>Dr. Laila Khan</h4>
+                <p>Fellow, Climate Security. Environmental policy specialist.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-box" id="subscribe">
+          <div class="sidebar-box-header">Subscribe to Our Digest</div>
+          <div class="sidebar-box-body">
+            <p style="font-size:13px; color:var(--text2); margin-bottom:14px; line-height:1.6;">
+              Receive new research, policy briefs, and event invitations — no more than twice weekly.
+            </p>
+            <div class="subscribe-form">
+              <input type="text" placeholder="Your full name"/>
+              <input type="email" placeholder="Institutional email address"/>
+              <select>
+                <option>All Topics</option>
+                <option>Security &amp; Defense</option>
+                <option>Political Economy</option>
+                <option>Climate Policy</option>
+                <option>Governance</option>
+                <option>South Asia Focus</option>
+              </select>
+              <button class="btn-subscribe-sm" onclick="showToast('Subscribed! Welcome to the Strategos digest.')">Subscribe</button>
+              <p class="subscribe-note">Your details are never shared with third parties.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" style="background: var(--white);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Recent Publications</h2>
+      <a href="#" class="section-link">Research Repository →</a>
+    </div>
+    <div class="pub-grid">
+      <div class="pub-card">
+        <div class="pub-spine policy"></div>
+        <div class="pub-body">
+          <span class="pub-type">Research Paper · Foreign Policy</span>
+          <h3>Strategic Autonomy in a Fragmented World: Lessons from Middle Powers</h3>
+          <p class="authors">Dr. Ayesha Tariq, Dr. Kamran Malik</p>
+          <p class="pub-date">June 2026 · 48 pages · DOI: 10.xxxx</p>
+        </div>
+        <div class="pub-actions">
+          <a href="#" class="btn-pdf" onclick="showToast('Preparing PDF…'); return false;">PDF</a>
+          <a href="#" class="btn-cite" onclick="showToast('Citation copied to clipboard.'); return false;">Cite</a>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-spine research"></div>
+        <div class="pub-body">
+          <span class="pub-type">Report · Climate Security</span>
+          <h3>Water Wars or Water Peace? Hydropolitics in South Asia 2015–2025</h3>
+          <p class="authors">Dr. Laila Khan</p>
+          <p class="pub-date">May 2026 · 62 pages · DOI: 10.xxxx</p>
+        </div>
+        <div class="pub-actions">
+          <a href="#" class="btn-pdf" onclick="showToast('Preparing PDF…'); return false;">PDF</a>
+          <a href="#" class="btn-cite" onclick="showToast('Citation copied to clipboard.'); return false;">Cite</a>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-spine security"></div>
+        <div class="pub-body">
+          <span class="pub-type">Policy Brief · Counterterrorism</span>
+          <h3>Deradicalization Programs: A Global Audit and Recommendations</h3>
+          <p class="authors">Dr. Farida Noor, Research Team</p>
+          <p class="pub-date">April 2026 · 30 pages · DOI: 10.xxxx</p>
+        </div>
+        <div class="pub-actions">
+          <a href="#" class="btn-pdf" onclick="showToast('Preparing PDF…'); return false;">PDF</a>
+          <a href="#" class="btn-cite" onclick="showToast('Citation copied to clipboard.'); return false;">Cite</a>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-spine economy"></div>
+        <div class="pub-body">
+          <span class="pub-type">Working Paper · Political Economy</span>
+          <h3>IMF Conditionality and Political Stability: Evidence from 28 Programs</h3>
+          <p class="authors">Prof. Bilal Chaudhry</p>
+          <p class="pub-date">March 2026 · 55 pages · DOI: 10.xxxx</p>
+        </div>
+        <div class="pub-actions">
+          <a href="#" class="btn-pdf" onclick="showToast('Preparing PDF…'); return false;">PDF</a>
+          <a href="#" class="btn-cite" onclick="showToast('Citation copied to clipboard.'); return false;">Cite</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTARIES -->
+<section id="documentaries">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Documentary Films</h2>
+      <a href="#" class="section-link">Full Archive →</a>
+    </div>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-thumb t1">
+          <div class="doc-thumb-label">The Corridor</div>
+          <div class="doc-play"><div class="doc-play-icon"></div></div>
+          <span class="doc-duration">1h 24m</span>
+        </div>
+        <div class="doc-body">
+          <span class="tag tag-documentary card-tag">Documentary</span>
+          <h3>The Corridor: Infrastructure, Debt, and Sovereignty on the Belt and Road</h3>
+          <p>A ground-level investigation across Pakistan, Sri Lanka, and Kenya examining how Chinese infrastructure projects transform both landscapes and sovereignty.</p>
+          <div class="doc-meta">
+            <span>Directed by Usman Khalid</span><span>2025</span>
+          </div>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-thumb t2">
+          <div class="doc-thumb-label">Fog of Words</div>
+          <div class="doc-play"><div class="doc-play-icon"></div></div>
+          <span class="doc-duration">52m</span>
+        </div>
+        <div class="doc-body">
+          <span class="tag tag-documentary card-tag">Documentary</span>
+          <h3>Fog of Words: How Media Narratives Shape Counter-Terrorism</h3>
+          <p>Exploring how Western media framing of terrorism shapes public policy, military doctrine, and civil liberties — from 9/11 to the present day.</p>
+          <div class="doc-meta">
+            <span>Directed by Dr. Farida Noor</span><span>2024</span>
+          </div>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-thumb t3">
+          <div class="doc-thumb-label">Melt</div>
+          <div class="doc-play"><div class="doc-play-icon"></div></div>
+          <span class="doc-duration">1h 08m</span>
+        </div>
+        <div class="doc-body">
+          <span class="tag tag-research card-tag">Documentary</span>
+          <h3>Melt: The Geopolitics of Himalayan Glaciers and Water Futures</h3>
+          <p>Following scientists and diplomats along the Indus and Brahmaputra as shrinking glaciers transform the relationship between India, Pakistan, and China.</p>
+          <div class="doc-meta">
+            <span>Strategos Films Unit</span><span>2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULTANCY -->
+<section class="consult-section" id="consultancy">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Consultancy Services</h2>
+      <a href="#contact" class="section-link">Engage Us →</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h3>Strategic Advisory</h3>
+        <p>Bespoke policy analysis and strategic counsel for governments, multilateral institutions, and corporate actors navigating complex geopolitical environments.</p>
+        <ul>
+          <li>Foreign policy scenario planning</li>
+          <li>Risk and opportunity mapping</li>
+          <li>Bilateral relationship assessments</li>
+          <li>Executive briefings and war-gaming</li>
+        </ul>
+        <span class="service-price">Retainer &amp; Project Basis</span>
+        <a href="#contact" class="service-cta">Inquire →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Policy Development</h3>
+        <p>End-to-end policy design and drafting for government ministries, regulatory bodies, and international organizations seeking evidence-based frameworks.</p>
+        <ul>
+          <li>Legislative drafting support</li>
+          <li>Regulatory impact assessments</li>
+          <li>Stakeholder consultation facilitation</li>
+          <li>Implementation roadmaps</li>
+        </ul>
+        <span class="service-price">Project &amp; Tender Basis</span>
+        <a href="#contact" class="service-cta">Inquire →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Research &amp; Intelligence</h3>
+        <p>Deep-dive research, political risk intelligence, and competitive landscape analysis for institutional clients requiring rigorous independent assessment.</p>
+        <ul>
+          <li>Country and regional risk reports</li>
+          <li>Conflict early-warning analysis</li>
+          <li>Stakeholder and actor mapping</li>
+          <li>Customised quantitative modelling</li>
+        </ul>
+        <span class="service-price">Subscription &amp; Ad Hoc</span>
+        <a href="#contact" class="service-cta">Inquire →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📣</div>
+        <h3>Strategic Communication</h3>
+        <p>Narrative strategy, public diplomacy advisory, and communication frameworks to help institutions manage complex, contested public environments.</p>
+        <ul>
+          <li>Narrative audit and redesign</li>
+          <li>Crisis communication planning</li>
+          <li>Counter-disinformation strategies</li>
+          <li>Messaging for multilateral forums</li>
+        </ul>
+        <span class="service-price">Retainer Basis</span>
+        <a href="#contact" class="service-cta">Inquire →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Training &amp; Capacity Building</h3>
+        <p>Executive education, practitioner workshops, and institutional capacity-building programs for government officials, civil society, and corporate leaders.</p>
+        <ul>
+          <li>Policy analysis workshops</li>
+          <li>Negotiation and mediation training</li>
+          <li>Strategic foresight programs</li>
+          <li>Custom certificate courses</li>
+        </ul>
+        <span class="service-price">Per Programme</span>
+        <a href="#contact" class="service-cta">Inquire →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <h3>Institutional Partnerships</h3>
+        <p>Long-term research partnerships, co-publication agreements, and joint programming with think tanks, universities, and foundations worldwide.</p>
+        <ul>
+          <li>Joint research programs</li>
+          <li>Co-publication agreements</li>
+          <li>Conference and event co-hosting</li>
+          <li>Fellowship and exchange programs</li>
+        </ul>
+        <span class="service-price">MOU Basis</span>
+        <a href="#contact" class="service-cta">Inquire →</a>
+      </div>
+    </div>
+    <div class="consult-cta-bar">
+      <div>
+        <h3>Ready to engage Strategos on your challenge?</h3>
+        <p>Our team of senior fellows and practitioners is available for government, multilateral, and corporate mandates.</p>
+      </div>
+      <a href="#contact" class="btn-gold-lg">Schedule a Consultation →</a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-bg" id="events">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Upcoming Events</h2>
+      <a href="#" class="section-link">Full Calendar →</a>
+    </div>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-date-block">
+          <div class="event-day-box"><div class="day">14</div><div class="month">July</div></div>
+          <div class="event-info">
+            <h3>Annual Strategic Foresight Conference 2026</h3>
+            <p>Islamabad, Pakistan</p>
+          </div>
+        </div>
+        <span class="tag tag-policy">Conference</span>
+        <p class="event-desc">Two-day convening of policymakers, scholars, and practitioners to assess strategic trends in South Asia through 2030. Keynotes, panels, and closed-door working sessions.</p>
+        <a href="#" class="event-register" onclick="showToast('Registration link will open. Thank you!'); return false;">Register Now</a>
+      </div>
+      <div class="event-card">
+        <div class="event-date-block">
+          <div class="event-day-box"><div class="day">22</div><div class="month">July</div></div>
+          <div class="event-info">
+            <h3>Policy Dialogue: Climate Finance &amp; Sovereign Debt</h3>
+            <p>Webinar · Online</p>
+          </div>
+        </div>
+        <span class="tag tag-research">Webinar</span>
+        <p class="event-desc">A closed-format dialogue for finance ministry officials and development economists on restructuring climate finance mechanisms for highly-indebted developing economies.</p>
+        <a href="#" class="event-register" onclick="showToast('Registration link will open. Thank you!'); return false;">Register</a>
+      </div>
+      <div class="event-card">
+        <div class="event-date-block">
+          <div class="event-day-box"><div class="day">05</div><div class="month">Aug</div></div>
+          <div class="event-info">
+            <h3>Documentary Screening: "The Corridor" — Q&amp;A</h3>
+            <p>London, United Kingdom</p>
+          </div>
+        </div>
+        <span class="tag tag-documentary">Screening</span>
+        <p class="event-desc">Public screening of our latest documentary film at the Frontline Club, followed by a moderated panel with the director and two featured analysts.</p>
+        <a href="#" class="event-register" onclick="showToast('Registration link will open. Thank you!'); return false;">Register</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Senior Fellows &amp; Faculty</h2>
+      <a href="#" class="section-link">Full Directory →</a>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">AT</div>
+        <h3>Dr. Ayesha Tariq</h3>
+        <div class="role">Senior Fellow, Strategic Studies</div>
+        <p>Former MOFA adviser. Author of three books on South Asian regional order. PhD, Oxford.</p>
+        <div class="expertise">
+          <span class="expertise-tag">Foreign Policy</span>
+          <span class="expertise-tag">South Asia</span>
+          <span class="expertise-tag">Diplomacy</span>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">IS</div>
+        <h3>Prof. Imran Shah</h3>
+        <div class="role">Chair, Nuclear Policy Program</div>
+        <p>Leading expert on South Asian nuclear dynamics and strategic stability. Former ACDA consultant. PhD, MIT.</p>
+        <div class="expertise">
+          <span class="expertise-tag">Nuclear Security</span>
+          <span class="expertise-tag">Arms Control</span>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">FN</div>
+        <h3>Dr. Farida Noor</h3>
+        <div class="role">Director, Conflict Narratives Lab</div>
+        <p>Expert in strategic communication, counterterrorism, and political discourse analysis. PhD, LSE.</p>
+        <div class="expertise">
+          <span class="expertise-tag">SC &amp; Narratives</span>
+          <span class="expertise-tag">CT Policy</span>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">LK</div>
+        <h3>Dr. Laila Khan</h3>
+        <div class="role">Fellow, Climate &amp; Security</div>
+        <p>Environmental security specialist. Leads the institute's work on hydropolitics and climate-conflict linkages.</p>
+        <div class="expertise">
+          <span class="expertise-tag">Climate Security</span>
+          <span class="expertise-tag">Hydropolitics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMIT YOUR WORK / UPLOAD -->
+<section class="upload-section" id="media">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Submit Work &amp; Media</h2>
+      <a href="#" class="section-link">Submission Guidelines →</a>
+    </div>
+    <div class="upload-grid">
+      <!-- ARTICLE / PAPER UPLOAD -->
+      <div class="upload-card">
+        <h3>Submit an Article or Research Paper</h3>
+        <p>We welcome original research, policy commentaries, and analysis from scholars, practitioners, and independent researchers worldwide. All submissions are peer-reviewed by our editorial board.</p>
+        <div class="upload-form-field">
+          <label>Title of Submission</label>
+          <input type="text" placeholder="Full title of your work"/>
+        </div>
+        <div class="upload-form-field">
+          <label>Author(s)</label>
+          <input type="text" placeholder="Full name(s) and institutional affiliation"/>
+        </div>
+        <div class="upload-form-field">
+          <label>Submission Type</label>
+          <select>
+            <option>Research Paper (peer-reviewed)</option>
+            <option>Policy Brief</option>
+            <option>Commentary / Op-Ed</option>
+            <option>Book Review</option>
+            <option>Working Paper</option>
+          </select>
+        </div>
+        <div class="upload-form-field">
+          <label>Abstract (250 words max)</label>
+          <textarea placeholder="Summarise your argument, methodology, and key findings…"></textarea>
+        </div>
+        <div class="upload-zone" onclick="showToast('File browser would open here.')">
+          <div class="upload-icon">📄</div>
+          <p><strong>Click to upload</strong> or drag and drop</p>
+          <p>PDF, DOCX — max 20MB</p>
+        </div>
+        <ul class="upload-requirements">
+          <li>Original, unpublished work only</li>
+          <li>Minimum 2,000 words for papers; 800 for commentary</li>
+          <li>Must include full bibliography in Chicago or APA style</li>
+          <li>Author bio and headshot required</li>
+        </ul>
+        <button class="btn-submit-upload" style="margin-top:16px;" onclick="showToast('Submission received. Our editors will respond within 10 working days.')">Submit for Review</button>
+      </div>
+
+      <!-- DOCUMENTARY UPLOAD -->
+      <div class="upload-card">
+        <h3>Submit a Documentary or Video</h3>
+        <p>Strategos hosts original documentary films, policy video essays, and interview series on our platform and YouTube channel. We partner with independent filmmakers whose work aligns with our research mission.</p>
+        <div class="upload-form-field">
+          <label>Film / Video Title</label>
+          <input type="text" placeholder="Title of your documentary or film"/>
+        </div>
+        <div class="upload-form-field">
+          <label>Director / Producer</label>
+          <input type="text" placeholder="Full name and production company (if any)"/>
+        </div>
+        <div class="upload-form-field">
+          <label>Format &amp; Runtime</label>
+          <select>
+            <option>Short Documentary (under 30 min)</option>
+            <option>Feature Documentary (30 min+)</option>
+            <option>Video Essay (under 15 min)</option>
+            <option>Interview Series</option>
+            <option>Event Recording</option>
+          </select>
+        </div>
+        <div class="upload-form-field">
+          <label>Synopsis &amp; Thematic Focus</label>
+          <textarea placeholder="Describe your film's argument, subjects, and policy relevance…"></textarea>
+        </div>
+        <div class="upload-zone" onclick="showToast('File browser would open here.')">
+          <div class="upload-icon">🎬</div>
+          <p><strong>Upload a screener</strong> or provide a private link</p>
+          <p>MP4, MOV, Vimeo/YouTube link — max 2GB direct upload</p>
+        </div>
+        <ul class="upload-requirements">
+          <li>Screener or private link required for initial review</li>
+          <li>Must include transcript or closed captions</li>
+          <li>Rights clearance confirmation required</li>
+          <li>Revenue sharing available for featured films</li>
+        </ul>
+        <button class="btn-submit-upload" style="margin-top:16px;" onclick="showToast('Submission received. Our media team will respond within 14 working days.')">Submit Film</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / INQUIRY -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Get in Touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Engage Strategos Institute</h3>
+        <p>Whether you are a government ministry, a multilateral body, a corporate client, or an individual researcher — we welcome dialogue. Use the form to initiate a consultancy inquiry, media partnership, or speaking invitation.</p>
+        <div class="contact-detail">
+          <div class="icon">📍</div>
+          <div class="cd-text">
+            <h4>Headquarters</h4>
+            <p>Suite 400, Blue Area, Islamabad, Pakistan</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">🌍</div>
+          <div class="cd-text">
+            <h4>Regional Offices</h4>
+            <p>London · Washington DC · Dubai</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">✉️</div>
+          <div class="cd-text">
+            <h4>General Inquiries</h4>
+            <p>info@stratesosinstitute.org</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">💼</div>
+          <div class="cd-text">
+            <h4>Consultancy Engagements</h4>
+            <p>consult@stratesosinstitute.org</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">📝</div>
+          <div class="cd-text">
+            <h4>Editorial &amp; Submissions</h4>
+            <p>editorial@stratesosinstitute.org</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">🎬</div>
+          <div class="cd-text">
+            <h4>Media &amp; Press</h4>
+            <p>media@stratesosinstitute.org</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="inquiry-form">
+        <h3>Send an Inquiry</h3>
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="First name"/>
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Last name"/>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Institution / Organisation</label>
+          <input type="text" placeholder="Employer or institution"/>
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@institution.org"/>
+        </div>
+        <div class="form-field">
+          <label>Inquiry Type</label>
+          <select>
+            <option>Consultancy Engagement</option>
+            <option>Research Collaboration</option>
+            <option>Editorial Submission</option>
+            <option>Documentary / Media Partnership</option>
+            <option>Speaking Invitation</option>
+            <option>Press / Interview Request</option>
+            <option>Institutional Partnership</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="Please describe your inquiry, proposed scope, and timeline…"></textarea>
+        </div>
+        <button class="btn-send" onclick="showToast('Message sent. We aim to respond within 3 business days.')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand-name">Strategos Institute</div>
+      <div class="brand-tagline">Policy · Research · Strategy</div>
+      <p>An independent think tank and strategic consultancy advancing rigorous analysis of global security, political economy, governance, and climate policy.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#" title="X/Twitter">𝕏</a>
+        <a class="social-btn" href="#" title="LinkedIn">in</a>
+        <a class="social-btn" href="#" title="YouTube">▶</a>
+        <a class="social-btn" href="#" title="RSS">⌬</a>
+        <a class="social-btn" href="#" title="Podcast">◉</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Research</h4>
+      <ul>
+        <li><a href="#">Security &amp; Defense</a></li>
+        <li><a href="#">Political Economy</a></li>
+        <li><a href="#">Climate &amp; Environment</a></li>
+        <li><a href="#">Governance &amp; Democracy</a></li>
+        <li><a href="#">South Asia Program</a></li>
+        <li><a href="#">Nuclear Policy</a></li>
+        <li><a href="#">Conflict Narratives Lab</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Publications</h4>
+      <ul>
+        <li><a href="#">Research Papers</a></li>
+        <li><a href="#">Policy Briefs</a></li>
+        <li><a href="#">Working Papers</a></li>
+        <li><a href="#">Reports &amp; Surveys</a></li>
+        <li><a href="#">Commentary</a></li>
+        <li><a href="#">Documentary Films</a></li>
+        <li><a href="#">Podcast Series</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Institute</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Fellows</a></li>
+        <li><a href="#">Consultancy Services</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Donate / Support</a></li>
+        <li><a href="#">Annual Reports</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <div class="footer-bottom">
+      <p>© 2026 Strategos Institute. All rights reserved. Independent, non-partisan, non-profit.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Copyright</a>
+        <a href="#">Sitemap</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ARTICLE PAGE -->
+<div class="article-page" id="article-ndu-ai">
+  <div class="article-header">
+    <div class="article-header-inner">
+      <button class="article-back" onclick="closeArticle()">← Back to Strategos Institute</button>
+      <div class="article-header-meta">
+        <span class="tag tag-security">Security &amp; Defense</span>
+        <span class="tag tag-policy">AI Policy</span>
+        <span class="tag tag-research">Research Paper</span>
+      </div>
+      <h1>Artificial Intelligence in Modern Military and Defense Strategies</h1>
+      <p class="deck">A Comparative and Critical Analysis of Global Powers, Operational Realities, and Governance Imperatives</p>
+      <div class="article-byline">
+        <span><strong>Rizwan Ullah &amp; Hamza Saeed Toor</strong></span>
+        <span>National Defence University, Islamabad — Department of Leadership and Management Studies</span>
+        <span>Supervised by Assoc. Prof. Dr. Ismail Ramay</span>
+        <span>June 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-share-bar">
+    <div class="article-share-inner">
+      <span class="share-label">Share this paper</span>
+      <div class="share-btns">
+        <a class="share-btn" onclick="showToast('Link copied to clipboard.'); return false;">Copy Link</a>
+        <a class="share-btn" onclick="showToast('Opening X/Twitter…'); return false;">𝕏 Twitter</a>
+        <a class="share-btn" onclick="showToast('Opening LinkedIn…'); return false;">LinkedIn</a>
+        <a class="share-btn" onclick="showToast('Opening email…'); return false;">Email</a>
+      </div>
+      <button class="btn-dl-article" onclick="showToast('Preparing PDF for download…')">⬇ Download PDF</button>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <div class="article-notice">
+      <strong>Notice:</strong> This academic study has been prepared for educational and research purposes at the National Defence University, Islamabad, under the supervision of Associate Professor Dr. Ismail Ramay. All data, events, and operational references are derived exclusively from publicly available and verified sources. No classified, restricted, or sensitive information has been used or disclosed. <em>© 2026, National Defence University, Islamabad, Pakistan. All rights reserved.</em>
+    </div>
+
+    <div class="article-abstract">
+      <h3>Abstract</h3>
+      <p>The integration of Artificial Intelligence into contemporary military doctrine represents the most consequential transformation in the conduct of organized violence since the advent of nuclear weapons. Unlike prior revolutions in military affairs, AI militarization operates across the full spectrum of conflict: from sub-threshold cyber operations and drone swarm warfare to high-intensity conventional strikes involving autonomous targeting at machine speed. This study conducts a comparative analysis of how the United States, China, Israel, India, Pakistan, and Iran are integrating AI into their defense architectures. Drawing on documented operational evidence from the U.S.-Israel-Iran campaign of 2026, the India-Pakistan conflict of May 2025, and Israel's sustained AI-enabled targeting operations in Gaza, the paper examines how AI is reshaping doctrines of warfare, altering balances of power, and posing unprecedented risks to deterrence stability. The study further evaluates strategic risks including algorithmic bias, accountability gaps, and the erosion of meaningful human control over lethal decision-making, and concludes with a critical assessment of the global governance landscape.</p>
+    </div>
+
+    <h2>I. Introduction: The Third Offset and the Algorithmic Turn in Warfare</h2>
+    <p>The integration of Artificial Intelligence into military doctrine constitutes what scholars of strategic studies increasingly describe as a third offset strategy — a deliberate technological leap designed to nullify adversarial advantages through superior cognitive automation. Where the first offset relied on nuclear deterrence and the second on precision-guided munitions and stealth technology, the third offset places machine learning, autonomous systems, and data-driven intelligence at the centre of military supremacy. This is not merely an incremental upgrade in warfare technology; it represents an epistemological rupture in the very logic of how states conceive, plan, and execute violence.</p>
+    <p>Carl von Clausewitz famously described war as the continuation of politics by other means. Today, one must add a critical amendment: increasingly, those means are algorithmic. The kill chain — the sequence of identify-locate-track-target-engage-assess — is being compressed from hours to seconds through machine inference. The United States military's campaign against Iran, launched under Operation Epic Fury in February 2026, demonstrated this compression in practice. According to U.S. Central Command, more than 1,000 targets were struck within the first 24 hours, nearly double the scale of the shock-and-awe campaign in Iraq in 2003. The primary instrument enabling this tempo was the Maven Smart System, a Palantir-developed AI platform that the Pentagon's Chief Digital and Artificial Intelligence Officer later described as processing 20 billion tokens per day at the peak of operations.</p>
+    <p>The global market for AI in military intelligence, combat systems, and battlefield decision-making was valued at approximately $9.13 billion in 2025 and is projected to reach $29.48 billion by 2035, reflecting a compound annual growth rate of approximately 12.5 percent. These figures, however, measure only declared and commercially visible investment. The true scale of AI militarization — including classified programs in China, covert systems in Israel, and dual-use civilian infrastructure in Iran — substantially exceeds any open-source market valuation.</p>
+
+    <h2>II. Conceptual Framework: AI as a Revolution in Military Affairs</h2>
+    <p>The concept of a Revolution in Military Affairs holds that periodic technological transformations fundamentally restructure the relationship between offense and defense, altering the relative advantages of states. AI represents the most consequential RMA candidate since nuclear weapons for one decisive reason: unlike nuclear deterrence, which functions through the threat of catastrophic mutual destruction and is thus self-limiting, AI militarization operates across the full spectrum of conflict without an inherent ceiling of deterrence.</p>
+    <p>AI military applications can be broadly organized across five operational domains. The first is Intelligence, Surveillance, and Reconnaissance, where machine learning dramatically accelerates the processing of satellite imagery, signals intelligence, and open-source data into actionable targeting products. The second is Autonomous Weapons Systems, ranging from loitering munitions to fully autonomous combat vehicles and drone swarms. The third is cyber warfare, where AI enables both offensive intrusion at machine speed and defensive anomaly detection that no human analyst could replicate. The fourth is logistics and predictive maintenance. The fifth, and most strategically consequential, is command-and-control, where AI-assisted decision support systems compress the cognitive burden on human commanders.</p>
+
+    <div class="article-pullquote">
+      <div class="pq-label">Key Concept: The Kill Chain</div>
+      <p>The kill chain refers to the military sequence of Identify-Locate-Track-Target-Engage-Assess. Traditionally requiring hours of human deliberation across command hierarchies, AI systems are now compressing this sequence to seconds. In Operation Epic Fury (2026), kill-chain expert Craig Jones confirmed that the Maven Smart System enabled targeting decisions "much quicker in some ways than the speed of thought." This compression is the defining operational reality of contemporary AI-enabled warfare.</p>
+    </div>
+
+    <h2>III. The United States: Doctrine, Maven, and Operation Epic Fury (2026)</h2>
+    <p>The United States currently represents the most institutionally advanced and operationally tested military AI ecosystem in the world. The Department of Defense's Joint All-Domain Command and Control initiative is the architectural expression of Washington's AI vision: a networked system integrating sensor data from land, sea, air, space, and cyberspace into a unified operational picture, enabling faster and more coordinated responses than any adversary can match. JADC2 is not merely a communications network; it is a cognitive architecture designed to achieve decision dominance.</p>
+    <p>The defining operational demonstration occurred during Operation Epic Fury, the U.S.-Israeli air and missile campaign against Iran beginning February 28, 2026. Over 38 days of combat operations, U.S. forces struck more than 13,000 targets across Iran. The cornerstone was the Maven Smart System, developed by Palantir Technologies under a $1.3 billion Pentagon contract. Maven fuses satellite imagery, drone feeds, radar data, and signals intelligence into a single interface, classifies targets, recommends weapons systems, and generates strike packages in near real time. Anthropic's Claude large language model was embedded within the system to summarize intelligence, analyze data, simulate scenarios, and generate semi-automated legal justifications for each strike.</p>
+    <p>However, the U.S. experience with AI targeting has not been without serious controversy. A Reuters investigation revealed that a U.S. airstrike in Iran struck a school, raising urgent questions about the reliability of AI-assisted target identification. Former military officials confirmed to Semafor that stale human-curated data fed into Maven contributed to the error, illustrating that algorithmic precision is only as reliable as the intelligence data on which it operates.</p>
+
+    <h2>IV. China: Civil-Military Fusion and the Intelligentized Warfare Doctrine</h2>
+    <p>China's approach to AI militarization is arguably the most strategically coherent and comprehensively resourced of any power in the current era. The People's Liberation Army has explicitly codified intelligentized warfare as the governing concept of its future military doctrine. Unlike the American model, China's Civil-Military Fusion policy mandates that civilian firms — including Alibaba, Baidu, Huawei, CETC, and NORINCO — directly contribute to military AI development, eliminating institutional friction and creating an efficient pipeline from commercial innovation to military application.</p>
+    <p>In a January 2026 broadcast, the PLA's National University of Defense Technology demonstrated a single soldier operating a coordinated formation of 200 autonomous drones — a capability the Pentagon has acknowledged it cannot currently match in speed or manufacturing scale. Researchers at Xi'an Technological University have reported that their DeepSeek-powered military planning system can analyze 10,000 battlefield scenarios in 48 seconds, compressing a process that would take human planners approximately two days. China's 15th Five-Year Plan institutionalizes Military-Civil Fusion as the primary mechanism for defense modernization, with national security rather than economic growth as the organizing principle.</p>
+
+    <h2>V. Israel: The Operational Laboratory of AI-Enabled Targeting</h2>
+    <p>If the United States represents AI doctrine and China represents strategic ambition, Israel represents real-world operational application at the highest intensity level currently documented in open-source literature. Israel's military-industrial complex, anchored by the IDF, Unit 8200, and defense firms including Elbit Systems and Rafael Advanced Defense Systems, has effectively transformed the country into a living laboratory for AI-enabled warfare.</p>
+    <p>The system designated Lavender, developed by Unit 8200, was designed to process mass surveillance data through a machine learning model trained to identify patterns correlating with militant activity. In the early weeks of the Gaza campaign, Lavender generated a list of approximately 37,000 potential human targets, described as low-level male Hamas sympathizers. Unit 8200 declared the system to be 90 percent accurate — meaning one in ten individuals flagged for lethal targeting may not have met the threshold of legitimate military targeting. The pace of AI-generated targeting recommendations created institutional pressure on human reviewers to approve strikes in intervals as brief as 20 seconds. The formal preservation of human-in-the-loop authorization thus became procedurally hollow.</p>
+
+    <div class="article-pullquote">
+      <div class="pq-label">The Lavender Precedent</div>
+      <p>Analysts at the Action on Armed Violence organization have warned that AI-driven targeting at scale with acknowledged error rates is being normalized. Gaza has functioned as Israel's AI weapons laboratory, with battle-tested systems now positioned for export to other states through established arms export channels.</p>
+    </div>
+
+    <h2>VI. India and Pakistan: The South Asian AI Security Dilemma and the May 2025 Conflict</h2>
+    <p>The May 2025 India-Pakistan military confrontation marked the first active combat use of drones between the two nuclear-armed states, bringing risks from theoretical concern to operational reality. A senior Indian military officer publicly acknowledged the use of an AI targeting system during Operation Sindoor, stating it achieved a 94 percent accuracy rate, analyzing real-time data from drones, radars, and satellite feeds combined with 26 years of archival intelligence data.</p>
+    <p>Pakistan's response demonstrated significant defensive AI capability. Pakistani integrated air defense systems successfully jammed, spoofed, and intercepted Indian drone incursions, with multiple sources confirming that Indian UAVs failed to reach their designated targets. Pakistan also deployed its own combat drones against 26 locations inside India in the early hours of May 10. The stabilization risks in South Asia are severe: both states maintain nuclear doctrines that rely on ambiguity, signaling, and deliberate communication — processes dependent on human interpretive judgment. AI systems introduced into early warning and cyber domains create new pathways for false positives and compressed decision cycles that represent a genuine threat to strategic stability.</p>
+
+    <h2>VII. Iran: Asymmetric AI and Proxy Warfare in an Age of Sanctions</h2>
+    <p>Iran presents a qualitatively different AI militarization model: the most advanced exemplar of asymmetric AI application, in which a mid-tier power with significant resource constraints achieves disproportionate strategic leverage through targeted AI investment in drone technology, cyber warfare, and proxy force coordination. Between 2022 and 2025, Iran supplied over 11,000 Shahed drones to Russia for deployment in Ukraine, providing Iranian engineers with an extraordinary volume of real-world performance data. In the 2026 U.S.-Israel-Iran conflict, Iran employed retaliatory cyber operations targeting AWS data centers in the UAE and Bahrain, demonstrating a sophisticated understanding of the infrastructure dependencies of AI-enabled warfare.</p>
+
+    <h2>VIII. Comparative Analysis</h2>
+    <div class="article-table-wrap">
+      <table class="article-table">
+        <caption>Table 1: Comparative AI Defense Integration Matrix (2026). Sources: Breaking Defense, Arms Control Association, South Asian Voices, FDD, Brennan Center.</caption>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Key AI Programs</th>
+            <th>Recent Operational Use</th>
+            <th>Ethical Framework</th>
+            <th>Capability Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>United States</strong></td><td>JADC2, Maven Smart System</td><td>13,000+ strikes on Iran (Feb–Apr 2026)</td><td>High (DoD AI Ethics Board)</td><td>Dominant</td></tr>
+          <tr><td><strong>China</strong></td><td>PLA Intelligentized Warfare, AI Plus, CMF</td><td>200-drone autonomous swarms (Jan 2026)</td><td>Opaque / Limited</td><td>Rising rapidly</td></tr>
+          <tr><td><strong>Israel</strong></td><td>Lavender, Gospel, Where's Daddy, Unit 8200</td><td>37,000 targets AI-flagged in Gaza (2023–24)</td><td>Contested / Nominal</td><td>Advanced operational</td></tr>
+          <tr><td><strong>India</strong></td><td>DRDO AI roadmap, Harop drones, Reaper UAVs</td><td>AI targeting in Operation Sindoor (May 2025)</td><td>Developing</td><td>Growing</td></tr>
+          <tr><td><strong>Pakistan</strong></td><td>NCAI, Shahpar drones, NESCOM</td><td>Combat drones deployed May 2025</td><td>Limited formal framework</td><td>Asymmetric / Targeted</td></tr>
+          <tr><td><strong>Iran</strong></td><td>Shahed-136 series, IRGC AI proxy tools</td><td>11,000+ Shahed drones to Russia (2022–25)</td><td>Non-transparent</td><td>Asymmetric specialist</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>IX. Reshaping Doctrines: Autonomy, Speed, and the Erosion of Human Judgment</h2>
+    <p>Across all cases examined, a common doctrinal transformation is visible: AI is compressing the decision cycle and creating structural pressure to remove or marginalize human judgment at critical nodes. The distinction between human-in-the-loop and human-on-the-loop captures this shift precisely. In the latter model, a human technically retains override authority but is presented with AI-generated recommendations at a pace and volume that renders genuine deliberation practically impossible. The human becomes a legitimating mechanism rather than a decision-making agent.</p>
+    <p>This doctrinal shift has consequences for deterrence theory that extend beyond the tactical level. Deterrence as developed by Thomas Schelling fundamentally presupposes rational, communicating, and temporally patient actors. AI systems are none of these things in the philosophical sense. They are optimizing rather than rational — a meaningful distinction. They do not communicate intent; they execute instructions. And they operate at computational speed that renders the signaling, pause, and recalibration on which deterrence stability depends practically infeasible.</p>
+
+    <h2>X. Strategic Risks: Algorithmic Bias, Escalation, and Accountability</h2>
+    <h3>A. Algorithmic Bias</h3>
+    <p>Algorithmic bias is the tendency of machine learning systems to reproduce and amplify the biases present in their training data. In military contexts, this manifests most directly in targeting and threat identification. The Lavender system's equation of being male with being a militant is one documented manifestation. Another is the acknowledged 10 percent error rate accepted as operationally tolerable — a threshold that would be considered catastrophic in any civilian risk management context.</p>
+    <h3>B. Escalation Dynamics</h3>
+    <p>The speed advantage that AI confers on military operations is simultaneously a crisis management liability. States that have not established shared understandings about the meaning of AI-enabled actions in ambiguous scenarios risk triggering unintended conflicts. The India-Pakistan crisis of May 2025 demonstrated that even between states with existing communication channels, the pace of AI-enabled operations can outrun the speed at which political authorities can intervene to arrest escalation.</p>
+    <h3>C. Accountability Gaps</h3>
+    <p>Traditional frameworks of military accountability rest on the principle of command responsibility. When an AI system generates targeting recommendations that prove to be based on faulty data, the chain of accountability becomes radically diffuse. In the Iran school strike case, former military officials attributed the error to stale human-curated data fed into Maven — simultaneously implicating human data managers, procurement officials, and the commanders who approved its operational use. This diffusion ensures that harm goes unaccountable, weakening the deterrent function of international humanitarian law.</p>
+    <h3>D. The Capability-Intention Gap</h3>
+    <p>This risk describes the tendency for adversaries to interpret AI-enabled military capabilities as preparations for a preemptive first-strike posture even when the deploying state's intentions are defensive — a classic security dilemma dynamic now operating at algorithmic speed.</p>
+
+    <h2>XI. The Governance Imperative: Toward International Regulation of AI in Warfare</h2>
+    <p>The global governance landscape for AI in military applications remains alarmingly underdeveloped relative to the pace of technological deployment. The United Nations Group of Governmental Experts on Lethal Autonomous Weapons Systems has been deliberating since 2014 without producing a binding international instrument. The U.N. Secretary-General's New Agenda for Peace called for a legally binding treaty prohibiting lethal autonomous weapons systems from operating without human oversight, with a 2026 target completion date, but no such treaty has materialized.</p>
+    <p>Track-II dialogues between military and technical experts, shared incident reporting protocols to prevent AI-induced escalation, mutual declarations of human-in-the-loop requirements for nuclear command and control, and bilateral AI crisis communication channels represent incremental but practically achievable steps. The precedent of nuclear hotlines and pre-notification agreements during the Cold War demonstrates that adversarial states can develop limited technical cooperation mechanisms even in the absence of broader political convergence.</p>
+
+    <h2>XII. Conclusion: Intelligence Without Wisdom</h2>
+    <div class="article-pullquote">
+      <div class="pq-label">The Central Challenge</div>
+      <p>Intelligence, in the computational sense, is the capacity to process information and optimize for specified objectives. Wisdom, in the human sense, is the capacity to judge which objectives are worth pursuing and at what cost to which values. AI systems are capable of extraordinary intelligence. They are, by definition, incapable of wisdom — which is inseparable from moral consciousness, temporal perspective, and the recognition of one's own fallibility. The states examined in this study are in the process of delegating progressively greater portions of their lethal decision-making to systems that are intelligent without being wise.</p>
+    </div>
+    <p>The operational evidence of 2025 and 2026 has transformed the debate over AI in warfare from speculative to empirical. The Maven Smart System has been used to strike 13,000 targets in 38 days in Iran. AI-enabled drones have been used in active combat between two nuclear-armed states in South Asia. An AI targeting system has flagged 37,000 individuals for potential lethal action in Gaza with an acknowledged error rate and 20-second human review windows. These are not hypothetical scenarios; they are documented operational realities.</p>
+    <p>For emerging powers such as Pakistan, the strategic lesson is not to acquire AI military capability at any cost and under any ethical framework, but rather to recognize that the states which develop robust governance mechanisms alongside their AI capabilities will be better positioned to manage the stability risks that AI militarization inevitably generates. A nation's security is ultimately determined not only by the sophistication of its weapons but by the wisdom of the judgment that directs them.</p>
+
+    <div class="article-glossary">
+      <h2>Annex A: Key Terminology</h2>
+      <div class="glossary-grid">
+        <div class="glossary-item"><dt>Kill Chain</dt><dd>The military targeting sequence: Identify-Locate-Track-Target-Engage-Assess. AI is compressing each step from hours to seconds.</dd></div>
+        <div class="glossary-item"><dt>Intelligentized Warfare</dt><dd>China's PLA doctrine for integrating AI, big data, and autonomous systems as the primary basis of military power.</dd></div>
+        <div class="glossary-item"><dt>Civil-Military Fusion</dt><dd>China's policy mandating that civilian technology companies directly contribute to military AI development.</dd></div>
+        <div class="glossary-item"><dt>Autonomous Weapons Systems (AWS)</dt><dd>Weapons capable of selecting and engaging targets without real-time human direction.</dd></div>
+        <div class="glossary-item"><dt>JADC2</dt><dd>Joint All-Domain Command and Control: the U.S. military's AI-integrated system linking sensors and shooters across all operational domains.</dd></div>
+        <div class="glossary-item"><dt>Maven Smart System</dt><dd>Palantir's AI platform used by the U.S. military to fuse battlefield data and generate targeting recommendations.</dd></div>
+        <div class="glossary-item"><dt>Algorithmic Bias</dt><dd>Systematic errors in AI output caused by biases embedded in training data or model design.</dd></div>
+        <div class="glossary-item"><dt>Human-in-the-Loop</dt><dd>A system requiring genuine human cognitive engagement before a lethal decision is executed.</dd></div>
+        <div class="glossary-item"><dt>Human-on-the-Loop</dt><dd>A system that nominally retains human override authority but operates at a pace that renders genuine deliberation practically impossible.</dd></div>
+        <div class="glossary-item"><dt>Loitering Munitions</dt><dd>Unmanned aerial weapons designed to fly over a target area for extended periods before striking; also called suicide drones.</dd></div>
+        <div class="glossary-item"><dt>A2/AD</dt><dd>Anti-Access/Area Denial: a strategy using long-range precision weapons to prevent adversaries from projecting power into contested regions.</dd></div>
+        <div class="glossary-item"><dt>Normative Erosion</dt><dd>The gradual weakening of established ethical or legal standards through precedent-setting behavior.</dd></div>
+      </div>
+    </div>
+
+    <div class="article-refs">
+      <h2>References</h2>
+      <p class="ref-category">Books and Monographs</p>
+      <p>Clausewitz, Carl von. <em>On War.</em> Translated by Michael Howard and Peter Paret. Princeton University Press, 1984.</p>
+      <p>Johnson, James. <em>AI and the Bomb: Nuclear Strategy and Risk in the Digital Age.</em> Oxford University Press, 2023.</p>
+      <p>Russell, Stuart. <em>Human Compatible: Artificial Intelligence and the Problem of Control.</em> Viking, 2019.</p>
+      <p>Scharre, Paul. <em>Army of None: Autonomous Weapons and the Future of War.</em> W.W. Norton and Company, 2018.</p>
+      <p>Schelling, Thomas C. <em>The Strategy of Conflict.</em> Harvard University Press, 1960.</p>
+      <p class="ref-category">Journal Articles</p>
+      <p>Johnson, James. "Artificial Intelligence and Future Warfare: Implications for International Security." <em>Defense and Security Analysis</em> 35, no. 2 (2019): 147–169. DOI: 10.1080/14751798.2019.1600800.</p>
+      <p class="ref-category">Think Tank and Policy Reports</p>
+      <p>Kania, Elsa B. <em>Battlefield Singularity: Artificial Intelligence, Military Revolution, and China's Future Military Power.</em> Center for a New American Security, November 2017.</p>
+      <p>Scharre, Paul, and Michael Horowitz. <em>Artificial Intelligence: What Every Policymaker Needs to Know.</em> Center for a New American Security, June 2018.</p>
+      <p class="ref-category">Investigative Reports and News Sources</p>
+      <p>Abraham, Yuval, et al. "Lavender: The AI Machine Directing Israel's Bombing Spree in Gaza." <em>+972 Magazine,</em> April 3, 2024.</p>
+      <p>Freedberg, Sydney J. "'Insatiable Appetite' for AI: Maven Usage Surged for Strikes on Iran, Pentagon AI Chief Says." <em>Breaking Defense,</em> May 12, 2026.</p>
+      <p>Klare, Michael. "AI Plays Major Role in the War on Iran." <em>Arms Control Association,</em> May 2026.</p>
+      <p class="ref-category">South Asia</p>
+      <p>"Artificial Intelligence, Targeting, and Escalation Risks in the India-Pakistan Environment." <em>South Asian Voices,</em> April 14, 2026.</p>
+      <p>"Drone Warfare in South Asia." <em>Stimson Center,</em> December 2025.</p>
+    </div>
+
+  </div><!-- end article-body -->
+</div><!-- end article-page -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Date display
+  const d = new Date();
+  document.getElementById('current-date').textContent =
+    d.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  // Toast
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // Open/close article
+  function openArticle() {
+    document.getElementById('article-ndu-ai').classList.add('active');
+    document.getElementById('article-ndu-ai').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo(0, 0);
+  }
+  function closeArticle() {
+    document.getElementById('article-ndu-ai').classList.remove('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Nav active link
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', function() {
+      document.querySelectorAll('.nav-links a').forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
